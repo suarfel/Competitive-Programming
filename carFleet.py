@@ -1,16 +1,21 @@
-def carFleet(target, position , speed):
-        n = len(position)
-        time = []
-        nums = sorted(zip(position, speed), reverse=True)
-        print(nums)
-        for x, y in nums:
-            time.append((target-x) / y)
-        print(time)
-        ans, prev = 0, 0
-        for i in range(n):
-            if time[i] > prev:
-                ans += 1
-                prev = time[i]
+class Solution:
+    def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
+        target_left = []
+        collection=[]
+        left = []
+        for i in position:
+            target_left.append(target-i)
+        for i in range(len(position)):
+            collection.append([target_left[i],speed[i]])
+        collection.sort()
+        for i,j in collection:
+            left.append(i/j)
+        size_fleet = 0 
+        start = 0
+        for i in left:
+            if i > start:
+                size_fleet += 1
+                start = i 
         
-        return ans
-print(carFleet(15,[3,5,6],[6,3,5]))
+        return size_fleet 
+            
