@@ -1,5 +1,5 @@
 # Competitive-Programming
-The algorithms include :
+The algorithms included :
 #Leetcode 
 #Hackerrank
 #Codeforces
