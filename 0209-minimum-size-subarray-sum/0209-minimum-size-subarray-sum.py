@@ -1,31 +1,21 @@
 class Solution:
     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
-        sum  = 0
-        counter = 0
-        i = 0
-        j = 0
-        while i < len(nums):
-            # print(sum)
-            # print(counter)
-            if i == 0 and j == 0:
-                sum += nums[i]
-                if sum >= target:
-                    return 1
+        count = len(nums) + 1
+        k,j = 0,0
+        for i in range(1,len(nums)):
+            nums[i] += nums[i-1]
+        while j < len(nums):
+            if nums[j] < target :
                 j += 1
-            elif sum >= target :
-                if counter == 0:
-                    counter = j-i 
-                elif counter > j - i :
-                    counter = j - i 
-                    if counter == 1:
-                        return 1
-                sum -= nums[i]
-                i += 1
-            else :
-                if j == len(nums):
-                    return counter
-                sum += nums[j]
+            else:
+                if j < count:
+                    count = j +1
+                while nums[j]-nums[k] >= target:
+                    print(nums[j]-nums[k])
+                    if j-k < count :
+                        count = j-k
+                    k += 1
                 j += 1
-        return counter
-            
-                
+        if count == len(nums) + 1:
+            count = 0
+        return count
