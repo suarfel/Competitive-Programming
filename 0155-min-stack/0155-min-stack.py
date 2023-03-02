@@ -18,10 +18,8 @@ class MinStack:
     def top(self) -> int:
         return self.stack[-1]
     def getMin(self) -> int:
-        if len(self.min) == 0:
-            return []
-        else:
-            return self.min[-1]
+        
+        return self.min[-1]
         
 
 
