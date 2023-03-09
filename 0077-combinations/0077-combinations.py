@@ -1,16 +1,16 @@
 class Solution:
     def combine(self, n: int, k: int) -> List[List[int]]:
         ans = []
-        arr = []
-        ans = self.backTrack(ans,n,arr,k,1)
-        return ans
-    def backTrack(self,ans,n,arr,k,add):
-        if len(arr) == k:
-            ans.append(arr.copy())
+        temp = []
+        return self.backTrack(n,k,temp,ans,1)
+    def backTrack(self,n,k,temp,ans,index):
+        if len(temp) == k:
+            ans.append(list(temp))
         else:
-            for i in range(add,n+1):
-                arr.append(i)
-                self.backTrack(ans,n,arr,k,i+1)
-                arr.pop()
+            for i in range(index,n+1):
+                temp.append(i)
+                self.backTrack(n,k,temp,ans,i+1)
+                temp.pop()
         return ans
+         
             
