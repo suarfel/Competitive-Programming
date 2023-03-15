@@ -11,10 +11,10 @@ class Solution:
             s = temp + "1" + i
         return s
     def invert(self,s):
-        s = list(s)
+        st = []
         for i in range(len(s)):
             if s[i] == '0':
-                s[i] = '1'
+                st.append('1')
             else:
-                s[i] = '0'
-        return ''.join(s)
+                st.append('0')
+        return ''.join(st)
