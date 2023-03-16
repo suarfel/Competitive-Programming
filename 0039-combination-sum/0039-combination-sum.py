@@ -1,15 +1,18 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         ans = []
-        arr = []
-        return  self.backTrack(candidates,target,ans,arr,0) 
-    def backTrack(self,candidates,target,ans,arr,idx):
-        if target < 0:
-            return 
-        if target == 0:
-            ans.append(list(arr))
-        for i in range(idx,len(candidates)):
-            arr.append(candidates[i])
-            self.backTrack(candidates,target-candidates[i],ans,arr,i)
-            arr.pop()
+        def backTrack(candidate,candidate_sum,idx):
+            if candidate_sum == target:
+                ans.append(list(candidate))
+                return 
+            if len(candidates) == idx or candidate_sum > target:
+                return 
+            candidate.append(candidates[idx])
+            backTrack(candidate,candidate_sum + candidates[idx],idx)
+            candidate.pop()
+            backTrack(candidate,candidate_sum,idx+1)
+        backTrack([],0,0)
         return ans
+            
+                
+                
