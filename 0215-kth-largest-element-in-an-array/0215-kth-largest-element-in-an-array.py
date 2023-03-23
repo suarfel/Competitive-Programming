@@ -1,11 +1,12 @@
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
-        nums = self.quickSort(nums)
-        nums.reverse()
-        return nums[k-1]
-    def quickSort(self,nums):
+        nums = self.quickSort(nums,k)
+        return nums
+        # nums.reverse()
+        # return nums[k-1]
+    def quickSort(self,nums,k):
         if len(nums) <= 1:
-            return nums
+            return nums[0]
         p = nums[0]
         l = []
         r = []
@@ -14,6 +15,14 @@ class Solution:
                 l.append(nums[i])
             else:
                 r.append(nums[i])
-        return self.quickSort(l) + [p] + self.quickSort(r)
+        if k == len(r) +1:
+            return p
+        elif k < len(r) +1:
+            num = self.quickSort(r,k)
+            return num
+        else:
+            num = self.quickSort(l,k-len(r)-1)
+            return num
+            
         
         
