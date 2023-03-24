@@ -6,8 +6,6 @@ class Solution:
     def backTrack(self,nums,ans,arr,idx):
         if len(arr) > 1:
             ans.append(tuple(arr))
-        if idx > len(nums)-1:
-            return
         visited = set()
         for i in range(idx,len(nums)):
             if not arr or arr[-1] <= nums[i]:
