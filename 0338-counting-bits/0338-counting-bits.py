@@ -3,14 +3,10 @@ class Solution:
         ans = []
         for i in range(n+1):
             count = 0
-            while i >= 2:
-                if i%2 == 1:
+            for j in range(64):
+                if (i & (1 << j)) != 0:
                     count += 1
-                i //= 2
-            if i == 1:
-                ans.append(count+1)
-            else:
-                ans.append(count)
+            ans.append(count)
         return ans
                 
             
