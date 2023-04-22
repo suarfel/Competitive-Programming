@@ -34,7 +34,6 @@ class Solution:
         temp = True
         for node in graph:
             if node not in v:
-                print(True)
                 temp = dfs(node,set(),{node},set())
                 if not temp:
                     return temp
