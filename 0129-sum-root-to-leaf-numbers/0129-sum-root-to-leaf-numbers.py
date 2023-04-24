@@ -6,7 +6,7 @@
 #         self.right = right
 class Solution:
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
-        arr = []
+        self.ans = 0
         def dfs(root,number):
             if root:
                 number += str(root.val)
@@ -18,9 +18,9 @@ class Solution:
                 else:
                     dfs(root.right,number)
             else:
-                arr.append(int(number))
+                self.ans += int(number)
                 number = number[:len(number)-1]
-            return arr
+            return self.ans
       
-        return sum(dfs(root,''))
+        return dfs(root,'')
         
