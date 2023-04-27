@@ -8,12 +8,13 @@ class Solution:
     def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
         
         ans = []
-        queue = [(root,0)]
+        queue = deque([(root,0)])
         
         while queue:
             
-            root = queue.pop(0)
-            print(root[0].val)
+            
+            root = queue.popleft()
+             
             
             if not ans :
                 ans.append([root])
