@@ -49,8 +49,8 @@ class Solution:
             arr = neghibors(list(node[0]))
             
             if node[0] == target:
-                if ans > node[1] :
-                    ans = node[1]
+                ans = node[1] 
+                return ans
             
             for nex in arr:
                 
