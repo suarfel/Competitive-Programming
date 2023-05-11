@@ -36,41 +36,7 @@ class Solution:
             
             
             
-            
-            
-        
-        
-        
-        
-#         def dfs(source,cycle):  
-            
-#             if visited[source] == 'black' :
-#                 return True
-            
-#             visited[source] = 'grey'
-        
-#             for edge in graph[source]:
-#                 if visited[edge] == 'white':
-#                     cycle = dfs(edge,cycle)
-#                 elif visited[edge] == 'grey':
-#                     return False
-            
-#             if cycle :
-#                 visited[source] = 'black'
-#                 ans.append(source)
-
-            
-#         ans = []
-
-#         visited = ['white']*len(graph)
-#         for i in range(len(graph)):
-#             if visited[i] == 'white':
-#                 dfs(i,True)
-#         ans.sort()
-        
-#         return ans
-                
-        
+ 
         
         
         
