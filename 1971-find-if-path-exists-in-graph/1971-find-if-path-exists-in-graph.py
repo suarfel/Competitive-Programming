@@ -1,29 +1,43 @@
 class Solution:
     def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
-        d = {}
-        for i in edges:
-            if i[0] in d:
-                d[i[0]].append(i[1])
-            else:
-                d[i[0]] = [i[1]]
-            if i[1] in d:
-                d[i[1]].append(i[0])
-            else:
-                d[i[1]] = [i[0]]
-        print(d)
-        temp = False
-        def dfs(vertex, visited):
-            if vertex == destination:
-                return True
-            visited.add(vertex)
-            for neighbour in d[vertex]:
-                if neighbour not in visited:
-                    r = dfs(neighbour, visited)
-                    if r:
-                        return True
-            return False
         
-        return  dfs(source,set())
+        representative = {i : i for i in range(n)}
+        rank = [0 for i in range(n)]
+        
+        def find_rep(x):
+            
+            root = x 
+            while root != representative[root]:
+                root = representative[root]
+                
+            while x != root:
+                parent = representative[x]
+                representative[x] = root
+                x = parent
+                
+            return root
+        
+        def union(x,y):
+            
+            rootX = find_rep(x)
+            rootY = find_rep(y)
+            if rootX != rootY:
+                
+                if rank[rootX] > rank[rootY]:
+                    representative[rootY] = rootX
+                if rank[rootX] < rank[rootY]:
+                    representative[rootX] = rootY
+                if rank[rootX] == rank[rootY]:
+                    representative[rootY] = rootX
+                    rank[rootX] += 1
+                   
+        
+        for edge in edges:
+            union(edge[0],edge[1])
+          
+        return find_rep(source) == find_rep(destination)
+            
+            
         
         
         
