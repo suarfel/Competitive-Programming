@@ -1,18 +1,31 @@
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
         
-        memo = {}
+        matrix =[[0 for i in range(n)] for i in range(m) ]
+        matrix[0][0] = 1
+
+        for i in range(m):
+            for j in range(n):
+                if i == 0 and  j == 0:
+                    continue
+                elif i == 0 :
+                    matrix[i][j] = matrix[i][j-1]
+                elif j == 0:
+                    matrix[i][j] = matrix[i-1][j]
+                else:
+                    matrix[i][j] =  matrix[i][j-1] +  matrix[i-1][j]
+        return   matrix[m-1][n-1]
+            
         
-        def dp(m,n):
-            if m < 0 or n < 0:
-                return 0
-            if m == 0 and n == 0:
-                return 1
-            
-            key = (m,n)
-            if key not in memo:
-                memo[key] = dp(m-1,n) + dp(m,n-1)
-            
-            return memo[key]
-        return dp(m-1,n-1)
+        
+        
+                    
+                
+                    
+                
+                
+                
+                
+        
+ 
         
