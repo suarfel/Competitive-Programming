@@ -13,7 +13,7 @@ class Solution:
             
             s_counter[s[i]] += 1
             
-            if  len(p) == len(s[left:i+1]):
+            while len(p) ==  (i-left+1):
                 if s_counter == p_counter:
                     ans.append(left)
                 s_counter[s[left]] -= 1
