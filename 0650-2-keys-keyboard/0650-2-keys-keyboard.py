@@ -1,20 +1,23 @@
 class Solution:
     def minSteps(self, n: int) -> int:
         
-        def prime_factors(n):
-            factors = []
-            divisor = 2
-            while divisor <= n:
-                if n % divisor == 0:
-                    factors.append(divisor)
-                    n //= divisor
-                else:
-                    divisor += 1
-
-            return factors
+        @lru_cache(None)
+        def dp(scr,cli):
+            
+            if scr == n:
+                return 0
+            if scr > n:
+                return float('inf')
+            
+            cp_pa = dp(scr + scr,scr) + 2
+            
+            pa = float('inf')
+            if cli:
+                pa = dp(scr + cli,cli) + 1
+            
+            return min(cp_pa,pa)
         
-         
-        return sum(prime_factors(n))
+        return dp(1,0)
                         
         
                 
