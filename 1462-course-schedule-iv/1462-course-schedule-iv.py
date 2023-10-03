@@ -1,42 +1,38 @@
 class Solution:
     def checkIfPrerequisite(self, numCourses: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
         
-        graph = defaultdict(list)
-        indegree = defaultdict(int)
-        pre = defaultdict(set)
+    
+        is_prerequisites = [[float('inf')]*numCourses for _ in range(numCourses)]
+        checker = {i for i in range(numCourses)}
         
-        for before,after in prerequisites:
-            graph[before].append(after)
-            indegree[after] += 1
-        
-        take_courses = []
-        
-        for course in range(numCourses):
-            if indegree[course] == 0:
-                take_courses.append(course)
-        
-        queue = deque(take_courses)
-        
-        while queue:
+        for requisite,course in prerequisites :
+            is_prerequisites[requisite][course] = 0
             
-            node = queue.popleft()
+        
+        for i in range(numCourses):
             
-            for ele in graph[node]:
-                pre[ele].add(node)
-                pre[ele] = pre[ele] | pre[node]
+            for j in range(numCourses):
                 
-                indegree[ele] -= 1
-                if indegree[ele] == 0:
-                    queue.append(ele)
+                for k in range(numCourses):
+                    
+                    if is_prerequisites[j][i] + is_prerequisites[i][k] == 0:
+                        
+                        is_prerequisites[j][k] = is_prerequisites[j][i] + is_prerequisites[i][k]
         
         ans = []
+        
         for query in queries:
-            if query[0] in pre[query[1]]:
+            
+            if is_prerequisites[query[0]][query[1]] == 0:
                 ans.append(True)
             else:
                 ans.append(False)
-                
+        
         return ans
+        
+        
+        
+        
                 
             
             
