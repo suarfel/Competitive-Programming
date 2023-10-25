@@ -8,8 +8,3 @@ class Solution:
         if k%2 == 0:
             temp = self.kthGrammar(n-1,k//2)
             return abs(temp-1)
-            
-            
-        
-        
-        
