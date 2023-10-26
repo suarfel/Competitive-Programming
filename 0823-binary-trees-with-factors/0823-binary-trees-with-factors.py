@@ -11,8 +11,9 @@ class Solution:
                 
                 if arr[i] < arr[j]:
                     break
-                ans += counter[arr[j]]*counter[arr[i]/arr[j]]
+                if arr[i] % arr[j] == 0:
+                    ans += counter[arr[j]]*counter[arr[i]/arr[j]]
             counter[arr[i]] = ans
-            
+             
         return sum(counter.values())%(pow(10,9) + 7)
                     
