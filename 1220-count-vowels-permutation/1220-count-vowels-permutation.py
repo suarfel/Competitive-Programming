@@ -1,32 +1,34 @@
 class Solution:
     def countVowelPermutation(self, n: int) -> int:
-        
-        
-        # A  hashmap which holds a vowel followers 
-        
+        # vowel map holds the valid followers of the vowels
         vowel_map = defaultdict(set)
-        vowel_map['a'] = {'e'}
-        vowel_map['e'] = {'a','i'}
-        vowel_map['i'] = {'a','e','o','u'}
-        vowel_map['o'] = {'i','u'}
-        vowel_map['u'] = {'a'}
+        vowel_map[0] = {1}
+        vowel_map[1] = {0,2}
+        vowel_map[2] = {0,1,3,4}
+        vowel_map[3] = {2,4}
+        vowel_map[4] = {0}
         
-        @lru_cache(None)
-        def dp(char,n):
-            
-            if n == 1:
-                return 1
-            
-            ans = 0
-            for vowel in vowel_map:
-                if vowel in vowel_map[char]:
-                    ans += dp(vowel,n-1)
-            return ans
+        m = 5 # number of vowels
+        dp = [[0]*m for i in range(n)] # Two dimensional dp array 
         
-        ans = 0
-        for letter in vowel_map:
-            ans += dp(letter,n)
-        return ans% (pow(10,9) + 7)
+        for i in range(m):
+            dp[0][i] = 1
+        
+        for i in range(1,n):
+            for j in range(m):
+                for vowel in vowel_map[j]:
+                    dp[i][j] += dp[i-1][vowel]
+        
+        
+        return sum(dp[-1])%(pow(10,9)+7)
+                
+                
+                
+                
+                
+            
+        
+            
         
         
         
