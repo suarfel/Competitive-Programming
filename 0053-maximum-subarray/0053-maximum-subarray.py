@@ -1,20 +1,22 @@
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
         
-        ans = float('-inf')
-        temp = 0 
-        left = 0
-        
-        while left < len(nums):
-            temp += nums[left]
-            if temp  > 0 or temp > ans:
-                ans = max(ans,temp)
-            if temp < 0 :
-                temp = 0
-            left += 1
+        arr = []
+        @lru_cache(None)
+        def dp(idx):
             
-                
-        return ans
+            if idx < 0:
+                return 0
+            
+           
+            temp = max(nums[idx],nums[idx] + dp(idx-1))
+            arr.append(temp)
+            return temp
+        
+        dp(len(nums)-1)
+        return max(arr)
+            
+
             
             
             
