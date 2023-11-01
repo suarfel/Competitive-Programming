@@ -6,18 +6,30 @@
 #         self.right = right
 class Solution:
     def findMode(self, root: Optional[TreeNode]) -> List[int]:
-        arr = self.inOrder(root)
-        lst_1=[(arr.count(x),x) for x in set(arr)]
-        max_count=max(lst_1)[0]
+        
+        d = defaultdict(int)
+        
+        def mode(root):
+            
+            if not root:
+                return 
+            d[root.val] += 1
+            mode(root.left)
+            mode(root.right)
+            
+        mode(root)
+        sorted_dict = dict(sorted(d.items() , key=lambda item : item[1],reverse = True))
+        
+        temp = float('-inf')
         ans = []
-        for ele in lst_1:
-            if ele[0]==max_count:
-                ans.append(ele[1])
+
+        for key in sorted_dict:
+            if temp > sorted_dict[key]:
+                return ans
+            else:
+                temp = sorted_dict[key]
+                ans.append(key)
+                
         return ans
-    def inOrder(self,root):
-        arr = []
-        if root:
-            arr += self.inOrder(root.left)
-            arr.append(root.val)
-            arr += self.inOrder(root.right)
-        return arr
+            
+            
