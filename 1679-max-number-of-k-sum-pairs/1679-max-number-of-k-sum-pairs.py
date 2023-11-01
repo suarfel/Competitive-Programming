@@ -1,18 +1,23 @@
 class Solution:
     def maxOperations(self, nums: List[int], k: int) -> int:
+        
         count = 0
-        nums.sort()
-        i,j = 0,len(nums)-1
+        unique_counter = defaultdict(int)
         
-        while i < j:
-            if nums[i] + nums[j] > k:
-                j -=1
-            elif nums[i] + nums[j] < k:
-                i +=1
-            elif nums[i] + nums[j] == k:
+        for idx,val in enumerate(nums):
+            unique_counter[val] += 1
+        
+        for idx,val in enumerate(nums):
+            
+            if unique_counter[val] > 0:
+                unique_counter[val] -= 1
+            else:
+                continue
+            if k - val in unique_counter and unique_counter[k-val] > 0 :
                 count += 1
-                i +=1
-                j -=1
-        
+                
+                unique_counter[k-val] -= 1
+                
+                
         return count
             
