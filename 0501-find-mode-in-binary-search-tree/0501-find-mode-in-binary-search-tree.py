@@ -8,28 +8,28 @@ class Solution:
     def findMode(self, root: Optional[TreeNode]) -> List[int]:
         
         d = defaultdict(int)
+        stack = [root]
         
-        def mode(root):
+        while stack:
             
-            if not root:
-                return 
-            d[root.val] += 1
-            mode(root.left)
-            mode(root.right)
+            last = stack.pop()
+            d[last.val] += 1
             
-        mode(root)
-        sorted_dict = dict(sorted(d.items() , key=lambda item : item[1],reverse = True))
-        
-        temp = float('-inf')
-        ans = []
-
-        for key in sorted_dict:
-            if temp > sorted_dict[key]:
-                return ans
-            else:
-                temp = sorted_dict[key]
-                ans.append(key)
+            if last.left:
+                stack.append(last.left)
+            if last.right:
+                stack.append(last.right)
                 
+        max_freq = max(d.values())
+        ans = []
+        
+        for key in d:
+            if max_freq == d[key] :
+                ans.append(key)
+        
         return ans
+                
+            
+        
             
             
