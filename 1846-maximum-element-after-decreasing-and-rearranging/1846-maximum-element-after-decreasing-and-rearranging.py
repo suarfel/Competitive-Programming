@@ -9,5 +9,4 @@ class Solution:
             elif arr[index] > arr[index-1]+1:
                 arr[index] = arr[index-1]+1
         return arr[-1]
-                
         
