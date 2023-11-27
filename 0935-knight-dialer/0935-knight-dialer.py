@@ -22,4 +22,3 @@ class Solution:
             
     
         return sum(arr)%(10**9 + 7)
-        
